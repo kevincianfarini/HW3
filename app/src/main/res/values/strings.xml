@@ -1,6 +1,14 @@
 <resources>
+
     <string name="app_name">HW2</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="login_label">login</string>
+    <string name="message">Send a Message</string>
+    <string name="settings">Settings</string>
+    <string name="logged_in_url">http://128.173.237.129/loggedin</string>
+    <string name="logout_url">http://128.173.237.129/logout</string>
+    <string name="base_url">http://128.173.237.129</string>
+    <string name="cookies_header">Set-Cookie</string>
+
 </resources>

@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
 
 
     private Fragment homeScreenFragment,taskFragment,myStepsFragment, teamFragment;
-
+    public static final int READ_TIMEOUT_MS = 20000;
+    public static final int CONNECT_TIMEOUT_MS = 20000;
 
     private SharedPreferences prefs;
     private FragmentManager fragmentManager;

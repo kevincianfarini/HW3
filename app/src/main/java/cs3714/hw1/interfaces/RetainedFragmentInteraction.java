@@ -5,6 +5,8 @@ package cs3714.hw1.interfaces;
  */
 
 public interface RetainedFragmentInteraction {
-    public String getActiveFragmentTag();
-    public void setActiveFragmentTag(String s);
+    String getActiveFragmentTag();
+    void setActiveFragmentTag(String s);
+    void checkIfLoggedIn();
+    void loginResult(String result);
 }
