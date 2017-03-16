@@ -113,8 +113,7 @@ public class UserLoginTask extends AsyncTask<String, Void, String> {
             } else {
                 result = Constants.STATUS_OFFLINE;
             }
-
-
+            connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -10,5 +10,6 @@
     <string name="logout_url">http://128.173.237.129/logout</string>
     <string name="base_url">http://128.173.237.129</string>
     <string name="cookies_header">Set-Cookie</string>
+    <string name="logout">Logout</string>
 
 </resources>

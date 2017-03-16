@@ -18,13 +18,14 @@ import cs3714.hw1.fragments.HomeScreenFragment;
 import cs3714.hw1.fragments.MyStepsFragment;
 import cs3714.hw1.fragments.TaskFragment;
 import cs3714.hw1.fragments.TeamFragment;
+import cs3714.hw1.interfaces.ActivityInteraction;
 import cs3714.hw1.interfaces.HomeScreenInteraction;
 import cs3714.hw1.interfaces.RetainedFragmentInteraction;
 
-public class MainActivity extends AppCompatActivity implements HomeScreenInteraction {
+public class MainActivity extends AppCompatActivity implements HomeScreenInteraction, ActivityInteraction {
 
 
-    private Fragment homeScreenFragment,taskFragment,myStepsFragment, teamFragment;
+    private Fragment homeScreenFragment, taskFragment ,myStepsFragment, teamFragment;
     public static final int READ_TIMEOUT_MS = 20000;
     public static final int CONNECT_TIMEOUT_MS = 20000;
 
@@ -37,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         prefs = getPreferences(Context.MODE_PRIVATE);
-
-
 
         if(prefs.getString("loggedin","").equals("yes") || getIntent().getBooleanExtra("loggedin",false)){
             prefs.edit().putString("loggedin", "yes");
