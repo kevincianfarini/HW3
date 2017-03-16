@@ -57,6 +57,15 @@ public class TaskFragment extends Fragment implements RetainedFragmentInteractio
         mActiveFragmentTag = s;
     }
 
+    @Override
+    public void checkIfLoggedIn() {
+
+    }
+
+    @Override
+    public void loginResult(String result) {
+
+    }
 
 
 }

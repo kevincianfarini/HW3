@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,10 +26,9 @@ import cs3714.hw1.interfaces.RetainedFragmentInteraction;
 public class MainActivity extends AppCompatActivity implements HomeScreenInteraction, ActivityInteraction {
 
 
-    private Fragment homeScreenFragment, taskFragment ,myStepsFragment, teamFragment;
+    private Fragment homeScreenFragment, taskFragment, myStepsFragment, teamFragment;
     public static final int READ_TIMEOUT_MS = 20000;
     public static final int CONNECT_TIMEOUT_MS = 20000;
-
     private SharedPreferences prefs;
     private FragmentManager fragmentManager;
 
@@ -37,17 +37,13 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
-        prefs = getPreferences(Context.MODE_PRIVATE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()); //TODO change this back?
 
-        if(prefs.getString("loggedin","").equals("yes") || getIntent().getBooleanExtra("loggedin",false)){
+        if(prefs.getString("loggedin","").equals("yes") || getIntent().getBooleanExtra("loggedin", false)) {
             prefs.edit().putString("loggedin", "yes");
-
             prefs.edit().commit();
 
-
-
-        }
-        else {
+        } else {
             Intent intent = new Intent(this, LoginScreen.class);
             this.startActivity(intent);
             finish();
@@ -66,45 +62,30 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
 
         if (savedInstanceState == null) {
 
-
-
-
             homeScreenFragment = new HomeScreenFragment();
-            // Set dashboard fragment to be the default fragment shown
-            ((RetainedFragmentInteraction)taskFragment).setActiveFragmentTag(HomeScreenFragment.TAG_HOME_FRAGMENT);
+            ((RetainedFragmentInteraction) taskFragment).setActiveFragmentTag(HomeScreenFragment.TAG_HOME_FRAGMENT);
             fragmentManager.beginTransaction().replace(R.id.frame, homeScreenFragment ).commit();
+
         } else {
-            // Get references to the fragments if they existed, null otherwise
-//            teamStepsFragment = fragmentManager.findFragmentByTag(TeamStepsFragment.TAG_TEAM_STEPS_FRAGMENT);
-//            teamRankFragment = fragmentManager.findFragmentByTag(TeamsRankFragment.TAG_TEAM_RANK_FRAGMENT);
+
             myStepsFragment = fragmentManager.findFragmentByTag(MyStepsFragment.TAG_MY_STEPS_FRAGMENT);
-//            homeScreenFragment = fragmentManager.findFragmentByTag(HomeScreenFragment.TAG_HOME_FRAGMENT);
-            ((RetainedFragmentInteraction)taskFragment).setActiveFragmentTag(TeamFragment.TAG_TEAM_FRAGMENT);
+            ((RetainedFragmentInteraction) taskFragment).setActiveFragmentTag(TeamFragment.TAG_TEAM_FRAGMENT);
             teamFragment = fragmentManager.findFragmentByTag(TeamFragment.TAG_TEAM_FRAGMENT);
+
         }
-
-
-
-
     }
 
     @Override
     public void changeFragment(String fragment_name) {
-
-
         Fragment fragment;
         Class fragmentClass = null;
+
         if(fragment_name.equals(TeamFragment.TAG_TEAM_FRAGMENT)){
             fragmentClass = TeamFragment.class;
-
-            Log.d("HW2", "team fragment selected");
         }
         else if(fragment_name.equals(MyStepsFragment.TAG_MY_STEPS_FRAGMENT)){
             fragmentClass = MyStepsFragment.class;
-
-            Log.d("HW2", "team fragment selected");
         }
-//        else if()
 
         try {
             if (fragmentClass != null) {
@@ -118,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
                 }
 
 
-                FragmentTransaction ft= fragmentManager.beginTransaction();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
 
                 ft.replace(R.id.frame, fragment,
                         ((RetainedFragmentInteraction)taskFragment).getActiveFragmentTag());
@@ -130,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void InitiateLoginActivity() {
 
     }
 }
