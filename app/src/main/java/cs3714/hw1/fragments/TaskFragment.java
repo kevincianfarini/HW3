@@ -1,7 +1,10 @@
 package cs3714.hw1.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +15,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import cs3714.hw1.Constants.Constants;
+import cs3714.hw1.LoginScreen;
 import cs3714.hw1.R;
+import cs3714.hw1.interfaces.ActivityInteraction;
 import cs3714.hw1.interfaces.RetainedFragmentInteraction;
+import cs3714.hw1.network.IsUserLoggedInAsyncTask;
 
 /**
  * Created by Andrey on 2/16/2017.
@@ -23,6 +30,8 @@ public class TaskFragment extends Fragment implements RetainedFragmentInteractio
 
     public static final String TAG_TASK_FRAGMENT = "task_fragment";
     private String mActiveFragmentTag;
+    private String loginResult;
+    private ActivityInteraction activityInteraction;
 
     public static TaskFragment newInstance() {
         TaskFragment fragment = new TaskFragment();
@@ -42,6 +51,12 @@ public class TaskFragment extends Fragment implements RetainedFragmentInteractio
     }
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activityInteraction = (ActivityInteraction) context;
+        checkIfLoggedIn();
+    }
 
     @Override
     public void onResume() {
@@ -59,12 +74,14 @@ public class TaskFragment extends Fragment implements RetainedFragmentInteractio
 
     @Override
     public void checkIfLoggedIn() {
-
+        new IsUserLoggedInAsyncTask(this, this.getContext()).execute();
     }
 
     @Override
     public void loginResult(String result) {
-
+        if (!PreferenceManager.getDefaultSharedPreferences(this.getContext()).getString("status", "").equals(Constants.STATUS_LOGGED_IN)) {
+            this.startActivity(new Intent(this.getContext(), LoginScreen.class));
+        }
     }
 
 

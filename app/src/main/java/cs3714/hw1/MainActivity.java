@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import cs3714.hw1.Constants.Constants;
 import cs3714.hw1.fragments.HomeScreenFragment;
 import cs3714.hw1.fragments.MyStepsFragment;
 import cs3714.hw1.fragments.TaskFragment;
@@ -37,22 +38,9 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()); //TODO change this back?
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if(prefs.getString("loggedin","").equals("yes") || getIntent().getBooleanExtra("loggedin", false)) {
-            prefs.edit().putString("loggedin", "yes");
-            prefs.edit().commit();
-
-        } else {
-            Intent intent = new Intent(this, LoginScreen.class);
-            this.startActivity(intent);
-            finish();
-
-        }
-
-
-
-        taskFragment = (TaskFragment) fragmentManager.findFragmentByTag(TaskFragment.TAG_TASK_FRAGMENT);
+        taskFragment = fragmentManager.findFragmentByTag(TaskFragment.TAG_TASK_FRAGMENT);
 
         if (taskFragment == null) {
 
@@ -73,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
             teamFragment = fragmentManager.findFragmentByTag(TeamFragment.TAG_TEAM_FRAGMENT);
 
         }
+
     }
 
     @Override
@@ -116,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements HomeScreenInterac
 
     @Override
     public void InitiateLoginActivity() {
+
+        Intent intent = new Intent(this, LoginScreen.class);
+        this.startActivity(intent);
 
     }
 }

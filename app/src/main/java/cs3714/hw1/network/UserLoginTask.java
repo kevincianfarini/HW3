@@ -83,7 +83,7 @@ public class UserLoginTask extends AsyncTask<String, Void, String> {
         try {
             System.setProperty("http.keepAlive", "false");
             HttpURLConnection connection = (HttpURLConnection) (new URL(
-                    context.getString(R.string.logout_url)
+                    context.getString(R.string.login_url)
             )).openConnection();
             connection.setDoOutput(true);
             connection.setReadTimeout(MainActivity.READ_TIMEOUT_MS);

@@ -35,7 +35,7 @@ public class IsUserLoggedInAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String username = prefs.getString("username", "");
         if (username.equals("")) {
             return Constants.STATUS_RELOGIN;
@@ -55,7 +55,7 @@ public class IsUserLoggedInAsyncTask extends AsyncTask<Void, Void, String> {
 
 
     private String isUserLoggedIn(String user) throws IOException, JSONException {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String cookie = prefs.getString("sessionid", "");
         if (cookie.equals("")) {
             return Constants.STATUS_RELOGIN;
