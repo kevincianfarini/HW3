@@ -122,6 +122,11 @@ public class TeamRankFragment extends Fragment implements AdapterView.OnItemClic
                     teams.get(position).getStep_goal()*100/8/7) + "% of goal at " + teams.get(position).getSteps_total() + " steps");
             todayBar.setProgress(Math.round(((float)teams.get(position).getSteps()/(float)teams.get(position).getStep_goal()*100)));
             overallBar.setProgress(Math.round((teams.get(position).getSteps_total()/teams.get(position).getStep_goal()*100/8/7)));
+            if (position % 2 == 1) {
+                rowView.setBackgroundColor(getResources().getColor(R.color.table_data_row_odd));
+            } else {
+                rowView.setBackgroundColor(getResources().getColor(R.color.table_data_row_even));
+            }
             return rowView;
 
         }

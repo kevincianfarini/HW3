@@ -36,16 +36,19 @@ public class IsUserLoggedInAsyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String username = prefs.getString("username", "");
-        if (username.equals("")) {
-            return Constants.STATUS_RELOGIN;
-        }
-        try {
-            this.isUserLoggedIn(username);
-        } catch (Exception e) {
+        if (!prefs.getString("status", "").equals(Constants.STATUS_LOGGED_IN)) {
+            String username = prefs.getString("username", "");
+            if (username.equals("")) {
+                return Constants.STATUS_RELOGIN;
+            }
+            try {
+                return this.isUserLoggedIn(username);
+            } catch (Exception e) {
 
+            }
+            return Constants.STATUS_OFFLINE;
         }
-        return Constants.STATUS_OFFLINE;
+        return Constants.STATUS_LOGGED_IN;
     }
 
     @Override

@@ -79,7 +79,7 @@ public class TaskFragment extends Fragment implements RetainedFragmentInteractio
 
     @Override
     public void loginResult(String result) {
-        if (!PreferenceManager.getDefaultSharedPreferences(this.getContext()).getString("status", "").equals(Constants.STATUS_LOGGED_IN)) {
+        if (!result.equals(Constants.STATUS_LOGGED_IN)) {
             this.startActivity(new Intent(this.getContext(), LoginScreen.class));
         }
     }

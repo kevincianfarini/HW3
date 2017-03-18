@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,7 +29,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     private ProgressBar mygoal, teamgoal;
     private HomeScreenInteraction activity;
 
-    private ImageView teamFragment, myStepsFragment;
+    private ImageView teamFragment, myStepsFragment, teamRankFragment;
 
 
     public static HomeScreenFragment newInstance() {
@@ -75,12 +77,14 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
 
         teamFragment = (ImageView)view.findViewById(R.id.teamFragment);
         myStepsFragment = (ImageView)view.findViewById(R.id.myStepsFragment);
+        teamRankFragment = (ImageView) view.findViewById(R.id.teamRank);
 
         mygoal = (ProgressBar)view.findViewById(R.id.mygoal);
         teamgoal = (ProgressBar)view.findViewById(R.id.teamgoal);
 
         teamFragment.setOnClickListener(this);
         myStepsFragment.setOnClickListener(this);
+        teamRankFragment.setOnClickListener(this);
 
         mygoal.setMax(100);
         mygoal.setProgress(35);
@@ -92,9 +96,10 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         myrank.setText("2/4");
         teamrank.setText("4/14");
 
-    return view;
+        return view;
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -105,6 +110,9 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         if(v.equals(myStepsFragment)){
 
             activity.changeFragment(MyStepsFragment.TAG_MY_STEPS_FRAGMENT);
+        }
+        if (v.equals(teamRankFragment)) {
+            activity.changeFragment(TeamRankFragment.TAG_TEAM_RANK_FRAGMENT);
         }
     }
 }
