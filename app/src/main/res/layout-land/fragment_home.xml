@@ -29,7 +29,7 @@
         android:layout_width="93dp"
         android:layout_height="80dp"
         app:srcCompat="@drawable/ic_team_steps"
-        android:id="@+id/imageView3"
+        android:id="@+id/teamSteps"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/imageView3" />
+        app:layout_constraintLeft_toRightOf="@+id/teamSteps" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
@@ -98,5 +98,5 @@
         android:id="@+id/mygoal"
         app:layout_constraintBottom_toTopOf="@+id/teamsteps"
         android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/imageView3" />
+        app:layout_constraintLeft_toRightOf="@+id/teamSteps" />
 </android.support.constraint.ConstraintLayout>

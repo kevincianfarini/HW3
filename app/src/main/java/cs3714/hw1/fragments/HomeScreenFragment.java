@@ -29,7 +29,7 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
     private ProgressBar mygoal, teamgoal;
     private HomeScreenInteraction activity;
 
-    private ImageView teamFragment, myStepsFragment, teamRankFragment;
+    private ImageView teamFragment, myStepsFragment, teamRankFragment, myRankFragment;
 
 
     public static HomeScreenFragment newInstance() {
@@ -78,12 +78,14 @@ public class HomeScreenFragment extends Fragment implements View.OnClickListener
         teamFragment = (ImageView)view.findViewById(R.id.teamFragment);
         myStepsFragment = (ImageView)view.findViewById(R.id.myStepsFragment);
         teamRankFragment = (ImageView) view.findViewById(R.id.teamRank);
+        myRankFragment = (ImageView) view.findViewById(R.id.teamSteps);
 
         mygoal = (ProgressBar)view.findViewById(R.id.mygoal);
         teamgoal = (ProgressBar)view.findViewById(R.id.teamgoal);
 
         teamFragment.setOnClickListener(this);
         myStepsFragment.setOnClickListener(this);
+        teamRankFragment.setOnClickListener(this);
         teamRankFragment.setOnClickListener(this);
 
         mygoal.setMax(100);
